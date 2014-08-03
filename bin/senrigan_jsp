@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'senrigan'
+
+# 一旦引数はディレクトリと想定
+jsp_path= Pathname.new ARGV[0]
+
+begin 
+  Senrigan.setup
+
+  Dir.glob("#{jsp_path}/**/*.jsp").each do |file|
+    file_path = Pathname.new file
+    next if file_path.directory?
+
+    resource = Senrigan::Resource::Jsp.new(Pathname.new file)
+    resource.parse
+
+    Senrigan.register resource
+  end
+
+  Senrigan.generate
+end
