@@ -12,6 +12,8 @@ $ bundle exec bin/senrigan_jsp <<jsp directory path>>
 
 see images/routes.gif
 
+![visualized JSP dependencies](https://github.com/maeharin/senrigan/blob/master/images/sample_jsp.gif)
+
 ## Installation
 
 Senrigan depend on graphviz
