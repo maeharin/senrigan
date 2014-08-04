@@ -1,8 +1,16 @@
 # Senrigan
 
-Dependency visualizer like JSP etc..
+Visualizer for any dependencies. For Example template engine like JSP, ERB, Smarty etc..
 
 - Now, only JSP supportted...
+
+## Usage
+
+```
+$ bundle exec bin/senrigan_jsp <<jsp directory path>>
+```
+
+see images/routes.gif
 
 ## Installation
 
@@ -24,10 +32,3 @@ Or install it yourself as:
 
     $ gem install senrigan
 
-## Usage
-
-```
-$ bundle exec bin/senrigan_jsp <<jsp directory path>>
-```
-
-see images/routes.gif
