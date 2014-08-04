@@ -3,11 +3,12 @@ module Senrigan
     class Jsp
       class DirectoryGivenError < StandardError; end
 
-      def initialize(file_path, is_override: true)
+      def initialize(file_path, root_path, is_override: true)
         # directoryの場合、エラー
         raise DirectoryGivenError.new('error! directory given!') if file_path.directory?
         # TODO: 拡張子がjspでなければ、エラー
         @file_path = file_path
+        @root_path = root_path
         @is_override = is_override
       end
 
@@ -16,7 +17,7 @@ module Senrigan
       end
 
       def label
-        name
+        @file_path.realpath.relative_path_from(@root_path.realpath)
       end
 
       def options
@@ -46,7 +47,7 @@ module Senrigan
 
           if match_path.exist?
             # overrideはfalse
-            next_resources[match_path_origin.to_s] = Jsp.new(match_path, is_override: false)
+            next_resources[match_path_origin.to_s] = Jsp.new(match_path, @root_path, is_override: false)
           else
             # TODO: インクルード先が存在しない時
             puts "ignore because file not exist: #{match_path}"

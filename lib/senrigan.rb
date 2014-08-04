@@ -9,7 +9,8 @@ module Senrigan
     attr_writer :out_dir
 
     def setup
-      @graph = GraphViz.new( :G, type: :digraph )
+      #@graph = GraphViz.new( :G, type: :digraph )
+      @graph = GraphViz.new( :G, type: :digraph, rankdir: "LR" )
       @out_dir = File.expand_path('./images')
     end
 
