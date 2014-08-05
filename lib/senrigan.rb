@@ -25,13 +25,14 @@ module Senrigan
       g_resource_node = add_resource_to_graph resource
 
       # 続くアクションを登録
-      resource.next_resources.each do |label, next_resource|
+      resource.next_resources.each do |edge_label, next_resource|
         # next_resourceをグラフに登録
         g_next_resource_node = add_resource_to_graph next_resource
 
         # resource -> next_resourceのエッジを登録
         if g_next_resource_node
-          add_edge_to_graph g_resource_node, g_next_resource_node, label 
+          # TODO: 設定により、エッジのlabelを非表示にできるようにする
+          add_edge_to_graph g_resource_node, g_next_resource_node, edge_label 
         end
       end
     end

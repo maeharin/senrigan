@@ -38,6 +38,7 @@ module Senrigan
       def parse
         content.scan %r!<%@.*include.*file="(.+?)"! do |match|
           # TODO: インクルードが絶対パスで書かれている時
+          # TODO: <jsp:include>への対応
 
           # 絶対パス化する前のパス
           match_path_origin = Pathname.new(match.first)

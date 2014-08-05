@@ -29,6 +29,9 @@ describe Senrigan::Resource::Jsp do
       expect(jsp.next_resources).to eq Hash.new
     end
 
-    it "should be included jsp if parsed"
+    it "should have next_resources if parsed" do
+      jsp.parse
+      expect(jsp.next_resources.count).to eq 4
+    end
   end
 end
