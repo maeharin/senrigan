@@ -14,7 +14,7 @@
 
     <!-- content -->
     <div id="content">
-        <%@include file="top_content.jsp"%>
+        <jsp:include page="top_content.jsp" />
     </div>
 
     <!-- footer -->
