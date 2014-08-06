@@ -7,7 +7,7 @@ Visualizer for any dependencies. For Example template engine like JSP, ERB, Smar
 ## Usage
 
 ```
-$ bundle exec bin/senrigan_jsp <<jsp directory path>>
+$ bundle exec bin/senrigan jsp <<jsp directory path>>
 ```
 
 see images/routes.gif
