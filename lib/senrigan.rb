@@ -61,6 +61,4 @@ module Senrigan
       edge[:label] = label
     end
   end
-
-  self.setup
 end

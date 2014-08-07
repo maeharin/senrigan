@@ -11,21 +11,19 @@ module Senrigan
       # 一旦引数はディレクトリと想定
       root_path= Pathname.new jsp_path
 
-      begin 
-        Senrigan.setup
+      Senrigan.setup
 
-        Dir.glob("#{root_path}/**/*.jsp").each do |file|
-          file_path = Pathname.new file
-          next if file_path.directory?
+      Dir.glob("#{root_path}/**/*.jsp").each do |file|
+        file_path = Pathname.new file
+        next if file_path.directory?
 
-          resource = Senrigan::Resource::Jsp.new(file_path, root_path)
-          resource.parse
+        resource = Senrigan::Resource::Jsp.new(file_path, root_path)
+        resource.parse
 
-          Senrigan.register resource
-        end
-
-        Senrigan.generate
+        Senrigan.register resource
       end
+
+      Senrigan.generate
     end
   end
 end
