@@ -1,3 +1,5 @@
+require File.expand_path('../../spec_helper', __FILE__)
+
 describe Senrigan::Resource::Jsp do
   let(:root_path) { Pathname.new File.expand_path('../../jsp', __FILE__) }
   let(:file_path) { Pathname.new File.expand_path('../../jsp/top.jsp', __FILE__) }
