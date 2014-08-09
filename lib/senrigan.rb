@@ -5,18 +5,25 @@ require 'graphviz'
 
 module Senrigan
   class << self
-    attr_reader :graph
-    attr_writer :out_dir
+    attr_reader :configs
 
-    def setup
-      #@graph = GraphViz.new( :G, type: :digraph )
-      @graph = GraphViz.new( :G, type: :digraph, rankdir: "LR" )
-      @out_dir = File.expand_path('./images')
+    def setup(options = {})
+      @configs = default_options.merge(options)
+      @graph = GraphViz.new( :G, type: configs[:type], rankdir: configs[:rankdir] )
+    end
+
+    def default_options
+      {
+        output_path: File.expand_path('./images/output.gif'),
+        is_display_edge: false,
+        type: :digraph,
+        rankdir: "LR"
+      }
     end
 
     # 画像を生成する
     def generate
-      @graph.output( gif: "#{@out_dir}/output.gif" )
+      @graph.output( gif: configs[:output_path] )
     end
 
     # resourceをgraphvizのグラフに登録する
@@ -31,7 +38,7 @@ module Senrigan
 
         # resource -> next_resourceのエッジを登録
         if g_next_resource_node
-          # TODO: 設定により、エッジのlabelを非表示にできるようにする
+          edge_label = configs[:is_display_edge] ? edge_label : ''
           add_edge_to_graph g_resource_node, g_next_resource_node, edge_label 
         end
       end
