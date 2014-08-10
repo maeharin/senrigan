@@ -5,11 +5,11 @@ require 'graphviz'
 
 module Senrigan
   class << self
-    attr_reader :configs
+    attr_reader :options
 
-    def setup(options = {})
-      @configs = default_options.merge(options)
-      @graph = GraphViz.new( :G, type: configs[:type], rankdir: configs[:rankdir] )
+    def setup(args = {})
+      @options = default_options.merge(args)
+      @graph = GraphViz.new( :G, type: options[:type], rankdir: options[:rankdir] )
     end
 
     def default_options
@@ -23,7 +23,7 @@ module Senrigan
 
     # 画像を生成する
     def generate
-      @graph.output( gif: configs[:output_path] )
+      @graph.output( gif: options[:output_path] )
     end
 
     # resourceをgraphvizのグラフに登録する
@@ -38,7 +38,7 @@ module Senrigan
 
         # resource -> next_resourceのエッジを登録
         if g_next_resource_node
-          edge_label = configs[:is_display_edge] ? edge_label : ''
+          edge_label = options[:is_display_edge] ? edge_label : ''
           add_edge_to_graph g_resource_node, g_next_resource_node, edge_label 
         end
       end
