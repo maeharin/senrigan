@@ -1,34 +1,6 @@
 #!/usr/bin/env ruby
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'senrigan'
-require 'thor'
-
-module Senrigan
-  class Cli < ::Thor
-    option :"display-edge", type: :boolean
-    desc "visualize jsp", "visualize jsp"
-    def jsp(jsp_path)
-      # 一旦引数はディレクトリと想定
-      root_path= Pathname.new jsp_path
-
-      Senrigan.setup({
-        is_display_edge: options[:"display-edge"] ? true : false
-      })
-
-      Dir.glob("#{root_path}/**/*.jsp").each do |file|
-        file_path = Pathname.new file
-        next if file_path.directory?
-
-        resource = Senrigan::Resource::Jsp.new(file_path, root_path)
-        resource.parse
-
-        Senrigan.register resource
-      end
-
-      Senrigan.generate
-    end
-  end
-end
+require 'senrigan/cli'
 
 Senrigan::Cli.start(ARGV)
