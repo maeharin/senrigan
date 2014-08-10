@@ -4,6 +4,7 @@ require 'thor'
 module Senrigan
   class Cli < ::Thor
     class_option :"display-edge", type: :boolean
+    class_option :vertical, type: :boolean
 
     desc "visualize jsp", "visualize jsp"
     def jsp(jsp_path)
@@ -29,7 +30,8 @@ module Senrigan
 
     def setup
       Senrigan.setup({
-        is_display_edge: options[:"display-edge"] ? true : false
+        is_display_edge: options[:"display-edge"] ? true : false,
+        rankdir: options[:"vertical"] ? nil : "LR"
       })
     end
   end
