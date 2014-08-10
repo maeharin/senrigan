@@ -6,12 +6,15 @@ require 'thor'
 
 module Senrigan
   class Cli < ::Thor
+    option :"display-edge", type: :boolean
     desc "visualize jsp", "visualize jsp"
     def jsp(jsp_path)
       # 一旦引数はディレクトリと想定
       root_path= Pathname.new jsp_path
 
-      Senrigan.setup
+      Senrigan.setup({
+        is_display_edge: options[:"display-edge"] ? true : false
+      })
 
       Dir.glob("#{root_path}/**/*.jsp").each do |file|
         file_path = Pathname.new file
