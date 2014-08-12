@@ -10,8 +10,8 @@ module Senrigan
     def jsp(jsp_path)
       setup
 
-      # 一旦引数はディレクトリと想定
       root_path= Pathname.new jsp_path
+      raise 'error! path should be directory.' unless root_path.directory?
 
       Dir.glob("#{root_path}/**/*.jsp").each do |file|
         file_path = Pathname.new file
