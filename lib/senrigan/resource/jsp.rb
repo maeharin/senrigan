@@ -38,7 +38,6 @@ module Senrigan
       end
 
       def parse
-        # TODO: インクルードが絶対パスで書かれている時
         regs = [
           %r!<%@.*include.*file="(.+?)"!,
           %r!<jsp:include page="(.+?)"!
@@ -59,6 +58,13 @@ module Senrigan
       def set_next_resources(match_string)
         # 絶対パス化する前のパス
         match_path_origin = Pathname.new(match_string)
+        
+        # 絶対パス指定されている時は、無視
+        # TODO: 絶対パスが指定されている時も対応する
+        if match_path_origin.absolute?
+          puts "ignored: because absolute path is used: #{match_path_origin}"
+          return
+        end
 
         # 絶対パス化
         match_path = base_dir + match_path_origin
@@ -67,7 +73,7 @@ module Senrigan
           # overrideはfalse
           next_resources[match_path_origin.to_s] = Jsp.new(match_path, root_path, is_override: false)
         else
-          # TODO: インクルード先が存在しない時
+          # インクルード先ファイルが存在しない時は、無視
           puts "ignored: because file not exist: #{match_path}"
         end
       end

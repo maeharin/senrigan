@@ -15,6 +15,7 @@
     <!-- content -->
     <div id="content">
         <jsp:include page="top_content.jsp" />
+        <jsp:include page="/absolute_path.jsp" />
     </div>
 
     <!-- footer -->
