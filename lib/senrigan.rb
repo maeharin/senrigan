@@ -46,7 +46,7 @@ module Senrigan
 
     private
 
-    def add_resource_to_graph resource
+    def add_resource_to_graph(resource)
       ## overrideの場合、そのまま登録
       if resource.override?
         return @graph.add_node(resource.name, resource.options)
@@ -63,7 +63,7 @@ module Senrigan
       end
     end
 
-    def add_edge_to_graph node, other_node, label
+    def add_edge_to_graph(node, other_node, label)
       edge = @graph.add_edges(node, other_node)
       edge[:label] = label
     end

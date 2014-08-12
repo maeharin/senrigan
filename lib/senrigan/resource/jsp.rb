@@ -56,7 +56,7 @@ module Senrigan
 
       private
 
-      def set_next_resources match_string
+      def set_next_resources(match_string)
         # 絶対パス化する前のパス
         match_path_origin = Pathname.new(match_string)
 
